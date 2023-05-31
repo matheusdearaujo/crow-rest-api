@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  crow-rest-api:
+    build: .
+    image: crow-api-cpp
+    container_name: crow-rest-api
+    working_dir: /www/app
+    volumes:
+      - ./:/www/app
+    ports:
+      - 8787:18080
+    networks:
+      - crowapinet
+
+  # crow-rest-api-db:
+  #   image: postgres
+  #   container_name: crow-rest-api-db
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: crow_db
+  #     POSTGRES_USER: crowdb
+  #     POSTGRES_PASSWORD: crowdb
+  #   ports:
+  #     - 5231:5432
+  #   networks:
+  #     - crowapinet
+
+networks:
+  crowapinet:
+    driver: bridge
