@@ -41,17 +41,14 @@ ENV APP_ROOT="$IROOT/app"
 WORKDIR $APP_ROOT
 
 # RUN useradd crow
-
 # RUN usermod -u 1000 crow && \
 # 	usermod -a -G users crow && \
 # 	chown -R crow:crow $IROOT/app
-
 # USER crow
-
-RUN chown -R 1000:1000 $APP_ROOT
+# RUN chown -R 1000:1000 $APP_ROOT
 
 COPY --chown=1000:1000 . $APP_ROOT
 
-RUN g++ ./main.cpp
+RUN chmod +x $APP_ROOT/.scripts/build.sh
 
-CMD $APP_ROOT/a.out
+CMD sh $APP_ROOT/.scripts/build.sh
